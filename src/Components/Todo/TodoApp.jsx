@@ -16,7 +16,7 @@ export default class TodoApp extends Component {
       data: [],
       flag: false
     }
-    this.todo = 'http://localhost:8080/todo'
+    this.todo = 'https://backend-todo-list.herokuapp.com/todo'
 
   }
   // Lifecycle method
