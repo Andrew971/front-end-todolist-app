@@ -1,0 +1,95 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+body {
+  font-family: 'Scada', sans-serif;
+  background: url(../img/1.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  font-size: 2.5rem;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in; }
+  body h1 {
+    color: #ffff; }
+  body h2 {
+    color: #ffff; }
+  body h3 {
+    color: #ffff; }
+  body a {
+    color: white; }
+
+.background {
+  background: rgba(0, 0, 0, 0.39);
+  height: 100rem; }
+
+.list {
+  margin-top: 2rem;
+  width: 100%; }
+
+.list-group {
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto; }
+  .list-group .list-group-item {
+    background-color: transparent;
+    color: white;
+    border: 0; }
+
+.list-group::-webkit-scrollbar {
+  width: 12px; }
+
+.list-group::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px white; }
+
+.time h1 {
+  font-size: 20rem;
+  text-shadow: 2px 2px 50% black; }
+
+.form-control {
+  margin-top: 2rem;
+  background-color: transparent;
+  color: white;
+  border: 0;
+  border-bottom: 0.1rem solid #ffff;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
+  font-size: 3rem;
+  line-height: 1rem;
+  vertical-align: bottom;
+  text-align: center; }
+  .form-control:focus {
+    border: 0;
+    border-bottom: 0.1rem solid #ffff;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -moz-transition: none;
+    -webkit-transition: none; }
+
+.option {
+  color: white;
+  margin-top: 4rem;
+  margin-bottom: 2rem; }
+  .option div {
+    display: inline-block;
+    margin: 0 4rem;
+    cursor: pointer; }
+
+.clear {
+  display: inline-block;
+  color: white;
+  cursor: pointer; }
+
+.checkbox {
+  text-decoration: rgba(255, 76, 76, 0.564) line-through;
+  line-height: normal;
+  margin-top: 0; }
+
+.userlog {
+  margin-top: 10rem; }
