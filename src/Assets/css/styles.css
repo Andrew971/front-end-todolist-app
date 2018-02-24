@@ -62,7 +62,8 @@ body {
   font-size: 3rem;
   line-height: 1rem;
   vertical-align: bottom;
-  text-align: center; }
+  text-align: center;
+  padding-bottom: 2rem; }
   .form-control:focus {
     border: 0;
     border-bottom: 0.1rem solid #ffff;
