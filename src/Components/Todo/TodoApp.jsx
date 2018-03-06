@@ -45,7 +45,10 @@ export default class TodoApp extends Component {
         let Filter = res.data.filter((item)=>{
           return item.status !== true
         })
-        this.setState({ data: Filter });
+        this.setState({ 
+          data: Filter,
+          flag:false
+        });
       })
   }
 
@@ -61,7 +64,6 @@ export default class TodoApp extends Component {
         this.setState({ data: Filter });
       })
 
-      if(this.state.data.length===0){this.changeList(2)}
   }
 
   // Handle checkbox
@@ -82,8 +84,6 @@ export default class TodoApp extends Component {
           data: Filter
         });
       })
-      if(this.state.data.length===0){this.changeList(2)}
-
   }
 
   //Handle the clear all tasks button 
@@ -102,7 +102,8 @@ export default class TodoApp extends Component {
   }
 
   //Handle the slection All Active or Complete
-  changeList(num) {
+  changeList=(num) =>{
+
     axios.get(this.todo)
       .then((res) => {
         // Set state with result
@@ -147,7 +148,7 @@ export default class TodoApp extends Component {
               remove={this.handleRemove.bind(this)}
               handleCheckbox={this.handleCheckBox.bind(this)}
               ClearOut={this.handleClearOut.bind(this)}
-              changeList={this.changeList.bind(this)}
+              changeList={this.changeList}
             />
           </div>
         </div>

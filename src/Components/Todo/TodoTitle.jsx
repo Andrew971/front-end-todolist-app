@@ -5,7 +5,7 @@ const TodoTitle = ({ todoCount, todoComplit, flag }) => {
     return item.status === true
   })
   let message= ""
-  if(flag===false){
+  if((flag===false)||(arr.length <1)){
    message = (todoCount > 1) ?
       `You have ${todoCount} tasks` :
       `You have ${todoCount} task`; 
