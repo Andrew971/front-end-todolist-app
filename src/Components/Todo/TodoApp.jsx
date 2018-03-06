@@ -52,6 +52,7 @@ export default class TodoApp extends Component {
   // Handle remove
   handleRemove(id) {
 
+    
     axios.delete(this.todo + '/' + id)
       .then((res) => {
         let Filter = res.data.filter((item)=>{
@@ -59,22 +60,19 @@ export default class TodoApp extends Component {
         })
         this.setState({ data: Filter });
       })
+
+      if(this.state.data.length===0){this.changeList(2)}
   }
 
   // Handle checkbox
   handleCheckBox(id) {
-    let items = this.state.data.filter((item) => {
-      if (item.id === id) {
-        return item.status = !item.status
-      }
-    })
-
+   
     const state = this.state.data.find((list) => {
       if (list.id === id)
-        return list
+        return list ;
     })
 
-    axios.post(this.todo + '/' + id, { status: state.status })
+    axios.post(this.todo + '/' + id, { status: !state.status })
       .then((res) => {
         
         let Filter = res.data.filter((item)=>{
@@ -84,11 +82,12 @@ export default class TodoApp extends Component {
           data: Filter
         });
       })
+      if(this.state.data.length===0){this.changeList(2)}
 
   }
 
   //Handle the clear all tasks button 
-  handleClearOut() {
+  handleClearOut =() =>{
 
     const deleteList = this.state.data.filter((list) => {
       return list.status === true;
@@ -137,12 +136,16 @@ export default class TodoApp extends Component {
       <div>
         <div className="container">
           <div className="col-md-6 col-md-offset-3" align="center">
-            <TodoTitle todoCount={this.state.data.length} todoComplit={this.state.data} flag={this.state.flag} />
+            <TodoTitle 
+            todoCount={this.state.data.length} 
+            todoComplit={this.state.data} 
+            flag={this.state.flag} 
+            />
             <TodoForm addTodo={this.addTodo.bind(this)} />
             <TodoList
               todos={this.state.data}
               remove={this.handleRemove.bind(this)}
-              toggle={this.handleCheckBox.bind(this)}
+              handleCheckbox={this.handleCheckBox.bind(this)}
               ClearOut={this.handleClearOut.bind(this)}
               changeList={this.changeList.bind(this)}
             />
