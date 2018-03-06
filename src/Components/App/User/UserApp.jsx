@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 
 
 export default class User extends Component {
@@ -10,7 +9,6 @@ export default class User extends Component {
       date: this.props.clock,
       greeting: ""
     }
-    this.apiUrl = this.props.api
   }
 
   componentDidMount() {
