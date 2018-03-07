@@ -13,23 +13,48 @@ export default class TodoApp extends Component {
     super(props);
     // Set initial state
     this.state = {
+      userId: '',
       data: [],
       flag: false
     }
     this.todo = 'https://backend-todo-list.herokuapp.com/todo'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+  }
+
+
+  getdata = () => {
 
   }
   // Lifecycle method
   componentWillMount() {
     // Make HTTP reques with Axios
-    axios.get(this.todo)
+
+    const token = localStorage.getItem('token')
+    axios.post(this.apiUrl, null, {
+      headers: {
+        'Authorization': token
+      }
+    })
       .then((res) => {
-        // Set state with result
-        let Filter = res.data.filter((item)=>{
+
+        let Filter = res.data.todo.filter((item) => {
           return item.status !== true
         })
-        this.setState({ data: Filter });
-      });
+        this.setState({
+          data: Filter,
+          userId: res.data.id
+        })
+      })
+
+    // axios.get(this.todo)
+    //   .then((res) => {
+    //     // Set state with result
+    //     let Filter = res.data.filter((item)=>{
+    //       return item.status !== true
+    //     })
+    //     this.setState({ data: Filter });
+    //   });
   }
 
   // Add todo handler
@@ -38,16 +63,18 @@ export default class TodoApp extends Component {
       id: Date.now(),
       text: val,
       status: false,
-      date: Date.now()
+      date: Date.now(),
     }
-    axios.post(this.todo, Input)
+
+    axios.post(this.apiUrl + "todo", { Input, parentId: this.state.userId }
+    )
       .then((res) => {
-        let Filter = res.data.filter((item)=>{
+        let Filter = res.data.filter((item) => {
           return item.status !== true
         })
-        this.setState({ 
+        this.setState({
           data: Filter,
-          flag:false
+          flag: false
         });
       })
   }
@@ -55,10 +82,10 @@ export default class TodoApp extends Component {
   // Handle remove
   handleRemove(id) {
 
-    
-    axios.delete(this.todo + '/' + id)
+
+    axios.post(this.apiUrl + "todo/" + id, { parentId: this.state.userId })
       .then((res) => {
-        let Filter = res.data.filter((item)=>{
+        let Filter = res.data.filter((item) => {
           return item.status !== true
         })
         this.setState({ data: Filter });
@@ -68,16 +95,19 @@ export default class TodoApp extends Component {
 
   // Handle checkbox
   handleCheckBox(id) {
-   
+
     const state = this.state.data.find((list) => {
       if (list.id === id)
-        return list ;
+        return list;
     })
 
-    axios.post(this.todo + '/' + id, { status: !state.status })
+    axios.post(this.apiUrl + "todo/update/" + id, {
+      parentId: this.state.userId,
+      status: !state.status
+    })
       .then((res) => {
-        
-        let Filter = res.data.filter((item)=>{
+
+        let Filter = res.data.filter((item) => {
           return item.status !== true
         })
         this.setState({
@@ -87,35 +117,33 @@ export default class TodoApp extends Component {
   }
 
   //Handle the clear all tasks button 
-  handleClearOut =() =>{
+  handleClearOut = () => {
 
     const deleteList = this.state.data.filter((list) => {
       return list.status === true;
     });
 
     deleteList.forEach((test) => {
-      axios.delete(this.todo + '/' + test.id)
-        .then((res) => {
-          this.setState({ data: res.data })
-        })
+      axios.post(this.apiUrl + "todo/" + test.id, { parentId: this.state.userId }).then((res) => {
+        this.setState({ data: res.data })
+      })
     })
   }
 
   //Handle the slection All Active or Complete
-  changeList=(num) =>{
+  changeList = (num) => {
 
-    axios.get(this.todo)
+    axios.post(this.apiUrl + 'todo/get', { parentId: this.state.userId })
       .then((res) => {
-        // Set state with result
         if (num === 2) {
           this.setState({ data: res.data })
           let newlist = this.state.data.filter((list) => {
             return list.status === false;
           });
-          this.setState({ 
+          this.setState({
             data: newlist,
-            flag:false
-           });
+            flag: false
+          });
         }
 
         if (num === 3) {
@@ -123,9 +151,9 @@ export default class TodoApp extends Component {
           let newlist = this.state.data.filter((list) => {
             return list.status === true;
           });
-          this.setState({ 
+          this.setState({
             data: newlist,
-            flag:true
+            flag: true
           });
         }
       });
@@ -137,10 +165,10 @@ export default class TodoApp extends Component {
       <div>
         <div className="container">
           <div className="col-md-6 col-md-offset-3" align="center">
-            <TodoTitle 
-            todoCount={this.state.data.length} 
-            todoComplit={this.state.data} 
-            flag={this.state.flag} 
+            <TodoTitle
+              todoCount={this.state.data.length}
+              todoComplit={this.state.data}
+              flag={this.state.flag}
             />
             <TodoForm addTodo={this.addTodo.bind(this)} />
             <TodoList

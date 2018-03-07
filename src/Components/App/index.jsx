@@ -8,23 +8,21 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+import PrivateRoute from '../../js/PrivateRoute'
+import axios from 'axios';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      date: new Date(), 
-      user:''
+    this.state = {
+      date: new Date(),
+      user: ''
     };
-
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
-  SignIn(val) {
-    // const Name = {name: val}
-    localStorage.setItem("username", val)
-    this.setState({user: val})
-  }
-
+  
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
@@ -32,11 +30,13 @@ export default class App extends Component {
     );
 
     let username = localStorage.getItem('username')
-    this.setState({user: username});
+    this.setState({ user: username });
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
+
+
   }
 
   tick() {
@@ -44,26 +44,26 @@ export default class App extends Component {
       date: new Date()
     });
   }
- 
+
   render() {
     return (<Router>
 
       <div align="center">
         <ClockApp clock={this.state.date} />
 
-        <Route exact path="/" render={() => 
-          <UserSign SignIn={this.SignIn.bind(this)}/>
-        } />
-        
-        <Route exact path="/login" render={() => 
-          <UserLog SignIn={this.SignIn.bind(this)} />
+        <Route exact path="/" render={() =>
+          <UserSign />
         } />
 
-        <Route path="/todo" render={() => 
-          <UserApp clock={this.state.date} user={this.state.user}/>
+        <Route exact path="/login" render={() =>
+          <UserLog />
         } />
 
-        <Route path="/todo" render={() => 
+        <Route path="/todo" render={() =>
+          <UserApp clock={this.state.date} user={this.state.user} />
+        } />
+
+        <PrivateRoute path="/todo" render={() =>
           <TodoApp />
         } />
 

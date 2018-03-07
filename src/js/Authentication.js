@@ -4,7 +4,8 @@ class Auth {
   constructor() {
     const token = localStorage.getItem('token')
     this.token = token
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
   isAuthenticated = () => {
@@ -13,20 +14,20 @@ class Auth {
 
   authenticate(username, password, cb) {
     //Use axios to post the username/password to the server
-    axios.post('http://localhost:8080/login', {
+    axios.post(this.apiUrl+'login', {
       username,
       password
     }).then((response) => {
       //If we get a token, update isAuthenticated/token to indicate that
       //the user is now authenticated. Call the callback.
       if(response.data.token) {
-        console.log(this.isAuthenticated)
+     
 
         //this.isAuthenticated = true
         this.token = response.data.token
-        console.log(this.token)
-        console.log(this.isAuthenticated)
+      
         localStorage.setItem('token',response.data.token)
+        localStorage.setItem("username", response.data.username)
         cb(true)
       } else {
         cb(false)
