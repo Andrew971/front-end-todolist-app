@@ -17,8 +17,8 @@ export default class TodoApp extends Component {
       data: [],
       flag: false
     }
-    // this.apiUrl = 'http://localhost:8080/'
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
 
@@ -36,7 +36,6 @@ export default class TodoApp extends Component {
       }
     })
       .then((res) => {
-        
         let Filter = res.data.todo.filter((item) => {
           return item.status !== true
         })
@@ -45,15 +44,6 @@ export default class TodoApp extends Component {
           userId: res.data.id
         })
       })
-
-    // axios.get(this.todo)
-    //   .then((res) => {
-    //     // Set state with result
-    //     let Filter = res.data.filter((item)=>{
-    //       return item.status !== true
-    //     })
-    //     this.setState({ data: Filter });
-    //   });
   }
 
   // Add todo handler
