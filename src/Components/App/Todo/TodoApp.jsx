@@ -36,6 +36,7 @@ export default class TodoApp extends Component {
       }
     })
       .then((res) => {
+        
         let Filter = res.data.todo.filter((item) => {
           return item.status !== true
         })
