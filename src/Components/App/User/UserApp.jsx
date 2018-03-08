@@ -5,7 +5,6 @@ export default class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: this.props.user,
       date: this.props.clock,
       greeting: ""
     }
@@ -13,7 +12,7 @@ export default class User extends Component {
 
   componentDidMount() {
     // Make HTTP reques with Axios
-    let curHr = this.state.date.getHours()
+    let curHr = this.props.clock.getHours()
     if (curHr < 12) {
       this.setState({ greeting: 'Good morning' })
     } else if (curHr < 18) {
@@ -29,7 +28,7 @@ export default class User extends Component {
 
     return (
       <div className="container" align="center">
-        <h1>{this.state.greeting} {this.state.user}!</h1>
+        <h1>{this.state.greeting} {this.props.user}!</h1>
       </div>
     );
   }

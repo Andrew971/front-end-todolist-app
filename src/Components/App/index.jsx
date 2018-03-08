@@ -25,11 +25,6 @@ export default class App extends Component {
       () => this.tick(),
       1000
     );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-
     const token = localStorage.getItem('token')
     axios.post(this.apiUrl, null, {
       headers: {
@@ -37,10 +32,16 @@ export default class App extends Component {
       }
     })
       .then((res) => {
+        console.log(res.data)
         this.setState({
-          userId: res.data.username
+          user: res.data.username
         })
       })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+
   }
 
   tick() {
