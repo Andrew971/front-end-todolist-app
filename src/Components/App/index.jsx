@@ -6,6 +6,7 @@ import UserSign from './User/UserSign.jsx';
 import UserLog from './User/UserLog.jsx';
 import { Route} from 'react-router-dom'
 import PrivateRoute from '../../js/PrivateRoute'
+import axios from 'axios';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ export default class App extends Component {
       date: new Date(),
       user: ''
     };
-    // this.apiUrl = 'http://localhost:8080/'
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
   
@@ -24,15 +25,22 @@ export default class App extends Component {
       () => this.tick(),
       1000
     );
-
-    let username = localStorage.getItem('username')
-    this.setState({ user: username });
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
 
-
+    const token = localStorage.getItem('token')
+    axios.post(this.apiUrl, null, {
+      headers: {
+        'Authorization': token
+      }
+    })
+      .then((res) => {
+        this.setState({
+          userId: res.data.username
+        })
+      })
   }
 
   tick() {

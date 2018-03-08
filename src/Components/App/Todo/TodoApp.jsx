@@ -17,8 +17,8 @@ export default class TodoApp extends Component {
       data: [],
       flag: false
     }
-    // this.apiUrl = 'http://localhost:8080/'
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
 
