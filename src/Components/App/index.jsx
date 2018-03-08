@@ -4,12 +4,8 @@ import Clock from './Clock';
 import UserApp from './User/UserApp.jsx';
 import UserSign from './User/UserSign.jsx';
 import UserLog from './User/UserLog.jsx';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
+import { Route} from 'react-router-dom'
 import PrivateRoute from '../../js/PrivateRoute'
-import axios from 'axios';
 
 export default class App extends Component {
   constructor(props) {

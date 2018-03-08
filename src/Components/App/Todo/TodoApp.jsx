@@ -77,8 +77,7 @@ export default class TodoApp extends Component {
   // Handle checkbox
   handleCheckBox(id) {
     const state = this.state.data.find((list) => {
-      if (list.id === id)
-        return list;
+        return list.id === id
     })
 
     axios.post(this.apiUrl + "todo/update/" + id, {
