@@ -27,7 +27,6 @@ class Auth {
         this.token = response.data.token
       
         localStorage.setItem('token',response.data.token)
-        localStorage.setItem("username", response.data.username)
         cb(true)
       } else {
         cb(false)
