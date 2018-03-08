@@ -36,12 +36,12 @@ export default class TodoApp extends Component {
       }
     })
       .then((res) => {
-        let Filter = res.data.todo.filter((item) => {
-          return item.status !== true
+        let Filter = res.data.todos.filter((item) => {
+          return item.Status !== true
         })
         this.setState({
           data: Filter,
-          userId: res.data.id
+          userId: res.data.userid
         })
       })
   }
@@ -49,17 +49,15 @@ export default class TodoApp extends Component {
   // Add todo handler
   addTodo(val) {
     let Input = {
-      id: Date.now(),
       text: val,
       status: false,
-      date: Date.now(),
     }
 
     axios.post(this.apiUrl + "todo", { Input, parentId: this.state.userId }
     )
       .then((res) => {
         let Filter = res.data.filter((item) => {
-          return item.status !== true
+          return item.Status !== true
         })
         this.setState({
           data: Filter,
@@ -69,22 +67,18 @@ export default class TodoApp extends Component {
   }
 
   // Handle remove
-  handleRemove(id) {
-
-
+  handleRemove=(id) => {
     axios.post(this.apiUrl + "todo/" + id, { parentId: this.state.userId })
       .then((res) => {
         let Filter = res.data.filter((item) => {
-          return item.status !== true
+          return item.Status !== true
         })
         this.setState({ data: Filter });
       })
-
   }
 
   // Handle checkbox
   handleCheckBox(id) {
-
     const state = this.state.data.find((list) => {
       if (list.id === id)
         return list;
@@ -92,12 +86,12 @@ export default class TodoApp extends Component {
 
     axios.post(this.apiUrl + "todo/update/" + id, {
       parentId: this.state.userId,
-      status: !state.status
+      status: !state.status 
     })
       .then((res) => {
 
         let Filter = res.data.filter((item) => {
-          return item.status !== true
+          return item.Status !== true
         })
         this.setState({
           data: Filter
@@ -109,7 +103,7 @@ export default class TodoApp extends Component {
   handleClearOut = () => {
 
     const deleteList = this.state.data.filter((list) => {
-      return list.status === true;
+      return list.Status === true;
     });
 
     deleteList.forEach((test) => {
@@ -127,7 +121,7 @@ export default class TodoApp extends Component {
         if (num === 2) {
           this.setState({ data: res.data })
           let newlist = this.state.data.filter((list) => {
-            return list.status === false;
+            return list.Status === false;
           });
           this.setState({
             data: newlist,
@@ -138,7 +132,7 @@ export default class TodoApp extends Component {
         if (num === 3) {
           this.setState({ data: res.data })
           let newlist = this.state.data.filter((list) => {
-            return list.status === true;
+            return list.Status === true;
           });
           this.setState({
             data: newlist,

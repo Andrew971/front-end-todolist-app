@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TodoApp from './Todo/TodoApp.jsx';
-import ClockApp from './Clock/ClockApp.jsx';
+import Clock from './Clock';
 import UserApp from './User/UserApp.jsx';
 import UserSign from './User/UserSign.jsx';
 import UserLog from './User/UserLog.jsx';
@@ -46,10 +46,10 @@ export default class App extends Component {
   }
 
   render() {
-    return (<Router>
+    return (
 
       <div align="center">
-        <ClockApp clock={this.state.date} />
+        <Clock clock={this.state.date} />
 
         <Route exact path="/" render={() =>
           <UserSign />
@@ -68,7 +68,6 @@ export default class App extends Component {
         } />
 
       </div>
-    </Router>
     );
   }
 }

@@ -7,9 +7,9 @@ const TodoList = ({ todos, remove, handleCheckbox, ClearOut, changeList }) => {
   const List = todos.map((todo) => {
 
     return (
-      <div className="list-group-item row" key={todo.date}>
-        <div className="col-md-2" align="center"><input id={todo.id} type="checkbox" onChange={() => { handleCheckbox(todo.id) }} checked={todo.status} /></div>
-        <div className="col-md-8" align="justify"><label htmlFor={todo.id} className={todo.status === true ? "checkbox" : ''}>{todo.text}</label></div>
+      <div className="list-group-item row" key={todo.id}>
+        <div className="col-md-2" align="center"><input id={todo.id} type="checkbox" onChange={() => { handleCheckbox(todo.id) }} checked={todo.Status} /></div>
+        <div className="col-md-8" align="justify"><label htmlFor={todo.id} className={todo.Status === true ? "checkbox" : ''}>{todo.Text}</label></div>
         <div className="col-md-2" align="center"><a onClick={() => { remove(todo.id) }}><i className="far fa-trash-alt"></i></a></div>
       </div>);
   });
