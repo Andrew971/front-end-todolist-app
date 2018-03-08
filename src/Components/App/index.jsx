@@ -14,8 +14,8 @@ export default class App extends Component {
       date: new Date(),
       user: ''
     };
-    this.apiUrl = 'http://localhost:8080/'
-    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    // this.apiUrl = 'http://localhost:8080/'
+    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
   
