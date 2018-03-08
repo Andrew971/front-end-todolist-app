@@ -32,7 +32,6 @@ export default class App extends Component {
       }
     })
       .then((res) => {
-        console.log(res.data)
         this.setState({
           user: res.data.username
         })
