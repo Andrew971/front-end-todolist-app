@@ -2,7 +2,7 @@ import React from 'react';
 
 const TodoTitle = ({ todoCount, todoComplit, flag }) => {
   let arr= todoComplit.filter((item)=>{
-    return item.status === true
+    return item.Status === true
   })
   let message= ""
   if((flag===false)||(arr.length <1)){

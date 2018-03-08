@@ -15,7 +15,7 @@ const TodoList = ({ todos, remove, handleCheckbox, ClearOut, changeList }) => {
   });
 
   let arr = todos.filter((todo) => {
-    return todo.status === true
+    return todo.Status === true
   })
 
   let text = (arr.length > 1) ?

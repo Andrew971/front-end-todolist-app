@@ -70,10 +70,7 @@ export default class TodoApp extends Component {
   handleRemove=(id) => {
     axios.post(this.apiUrl + "todo/" + id, { parentId: this.state.userId })
       .then((res) => {
-        let Filter = res.data.filter((item) => {
-          return item.Status !== true
-        })
-        this.setState({ data: Filter });
+        this.setState({ data: res.data });
       })
   }
 
