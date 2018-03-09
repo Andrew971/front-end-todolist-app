@@ -10,7 +10,8 @@ export default class User extends Component {
       greeting: "",
       user:''
     }
-    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'http://localhost:8080/'
+    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
 
   }
   componentWillMount=()=>{
