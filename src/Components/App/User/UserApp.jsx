@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 export default class User extends Component {
@@ -6,10 +7,25 @@ export default class User extends Component {
     super(props)
     this.state = {
       date: this.props.clock,
-      greeting: ""
+      greeting: "",
+      user:''
     }
-  }
+    this.apiUrl = 'http://localhost:8080/'
 
+  }
+  componentWillMount=()=>{
+    const token = localStorage.getItem('token')
+    axios.post(this.apiUrl, null, {
+      headers: {
+        'Authorization': token
+      }
+    })
+      .then((res) => {
+        this.setState({
+          user: res.data.username
+        })
+      })
+  }
   componentDidMount() {
     // Make HTTP reques with Axios
     let curHr = this.props.clock.getHours()
@@ -20,15 +36,14 @@ export default class User extends Component {
     } else {
       this.setState({ greeting: 'Good evening' })
     }
-    let username = localStorage.getItem('username')
-    this.setState({ user: username });
+    
   }
 
   render() {
 
     return (
       <div className="container" align="center">
-        <h1>{this.state.greeting} {this.props.user}!</h1>
+        <h1>{this.state.greeting} {this.state.user}!</h1>
       </div>
     );
   }

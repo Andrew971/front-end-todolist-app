@@ -4,8 +4,8 @@ class Auth {
   constructor() {
     const token = localStorage.getItem('token')
     this.token = token
-    // this.apiUrl = 'http://localhost:8080/'
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
   isAuthenticated = () => {

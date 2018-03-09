@@ -17,8 +17,8 @@ export default class TodoApp extends Component {
       data: [],
       flag: false
     }
-    // this.apiUrl = 'http://localhost:8080/'
-    this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
+    this.apiUrl = 'http://localhost:8080/'
+    // this.apiUrl = 'https://backend-todo-list.herokuapp.com/'
   }
 
 
@@ -70,6 +70,8 @@ export default class TodoApp extends Component {
   handleRemove=(id) => {
     axios.post(this.apiUrl + "todo/" + id, { parentId: this.state.userId })
       .then((res) => {
+        console.log(res.data)
+
         this.setState({ data: res.data });
       })
   }
